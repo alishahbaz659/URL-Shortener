@@ -1,0 +1,14 @@
+type  ShortenedUrl {
+    id: ID!
+    shortUrl: String!
+    originalUrl: String!
+    creationDate: String!
+}
+
+type Query {
+    findShortenedUrlByShortUrl(shortUrl:String!): ShortenedUrl
+}
+
+type Mutation {
+    shortenUrl(originalUrl: String!): ShortenedUrl!
+}
