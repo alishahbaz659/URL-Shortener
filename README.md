@@ -1,8 +1,13 @@
 # URL Shortener Application
 
+<div align="center">
+  
 ## 📺 Demo Video
 [![URL Shortener API Demo](https://img.youtube.com/vi/XfzWEvYcIqc/0.jpg)](https://www.youtube.com/watch?si=cdWiwxqS5SSaVVD6&v=XfzWEvYcIqc&feature=youtu.be&themeRefresh=1)
+  
 **▶️ Click the image above to watch the demo video**
+
+</div>
 
 This project is a full-stack URL shortener service with a Spring Boot backend and React frontend.
 
