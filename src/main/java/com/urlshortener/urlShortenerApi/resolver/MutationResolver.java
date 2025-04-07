@@ -6,6 +6,7 @@ import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.stereotype.Controller;
 
+import java.util.Optional;
 import java.util.Random;
 
 @Controller
@@ -22,6 +23,18 @@ public class MutationResolver {
 
     @MutationMapping
     public ShortenedUrl shortenUrl(@Argument String originalUrl) {
+        // Check if this URL is already one of our short URLs
+        if (originalUrl.contains("/r/")) {
+            throw new IllegalArgumentException("Cannot shorten an already shortened URL");
+        }
+        
+        // Check if this original URL already exists in our database
+        Optional<ShortenedUrl> existingUrl = shortenedUrlRepository.findByOriginalUrl(originalUrl);
+        if (existingUrl.isPresent()) {
+            return existingUrl.get(); // Return the existing shortened URL
+        }
+        
+        // If it's a new URL, generate a new short URL
         String shortUrl = generateUniqueShortUrl();
         ShortenedUrl shortened = new ShortenedUrl(shortUrl, originalUrl);
         return shortenedUrlRepository.save(shortened);

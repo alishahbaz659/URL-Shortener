@@ -16,7 +16,7 @@ public class ShortenedUrl {
     private String shortUrl;
 
     @Column(nullable = false, length = 2048)
-    private String OriginalUrl;
+    private String originalUrl;
 
     private LocalDateTime creationDate;
 
@@ -26,7 +26,7 @@ public class ShortenedUrl {
 
     public ShortenedUrl(String shortUrl, String originalUrl) {
         this.shortUrl = shortUrl;
-        this.OriginalUrl = originalUrl;
+        this.originalUrl = originalUrl;
         this.creationDate = LocalDateTime.now();
     }
 
@@ -43,11 +43,11 @@ public class ShortenedUrl {
     }
 
     public String getOriginalUrl() {
-        return OriginalUrl;
+        return originalUrl;
     }
 
     public void setOriginalUrl(String originalUrl) {
-        OriginalUrl = originalUrl;
+        this.originalUrl = originalUrl;
     }
 
     public LocalDateTime getCreationDate() {

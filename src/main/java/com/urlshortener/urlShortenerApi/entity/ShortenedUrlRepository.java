@@ -11,4 +11,6 @@ public interface ShortenedUrlRepository extends JpaRepository<ShortenedUrl, Long
     Optional<ShortenedUrl> findByShortUrl(String shortUrl);
 
     boolean existsByShortUrl(String shortUrl);
+
+    Optional<ShortenedUrl> findByOriginalUrl(String originalUrl);
 }

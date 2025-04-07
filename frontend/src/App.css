@@ -1,0 +1,660 @@
+/* Modern UI Variables */
+:root {
+  --primary-color: #4f46e5;
+  --primary-hover: #4338ca;
+  --secondary-color: #f0f9ff;
+  --text-color: #1e293b;
+  --light-text: #64748b;
+  --border-color: #e2e8f0;
+  --success: #10b981;
+  --error: #ef4444;
+  --background: #f8fafc;
+  --card-bg: #ffffff;
+  --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --transition: all 0.3s ease;
+  --radius: 12px;
+}
+
+/* iOS Safari Fixes */
+html {
+  height: -webkit-fill-available;
+}
+
+body {
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
+  -webkit-touch-callout: none; /* Disable callout */
+  -webkit-tap-highlight-color: rgba(0,0,0,0); /* Remove tap highlight */
+}
+
+/* Add overscroll behavior to prevent bounce effects */
+html, body {
+  position: fixed;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
+
+#root {
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  height: 100%;
+  width: 100%;
+}
+
+/* Ensure buttons have proper touch targets for Safari */
+button, 
+.btn, 
+a[role="button"],
+input[type="submit"],
+input[type="button"] {
+  cursor: pointer;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+/* Fix for input focus zoom on iOS */
+@media screen and (max-width: 768px) {
+  input, 
+  select, 
+  textarea {
+    font-size: 16px !important;
+  }
+}
+
+/* Fix for VH units in iOS Safari */
+.vh-100 {
+  height: 100vh;
+  height: -webkit-fill-available;
+}
+
+/* Safe area insets for notched iPhones */
+@supports (padding: max(0px)) {
+  .app-container {
+    padding-left: max(12px, env(safe-area-inset-left));
+    padding-right: max(12px, env(safe-area-inset-right));
+    padding-bottom: max(12px, env(safe-area-inset-bottom));
+  }
+}
+
+/* Fix for iPhone form input zoom */
+@media screen and (max-width: 768px) {
+  input[type="text"],
+  input[type="url"],
+  input[type="email"],
+  input[type="search"],
+  input {
+    font-size: 16px; /* Prevents iOS Safari zoom on focus */
+  }
+}
+
+/* Improve tap target size on mobile */
+button, 
+a, 
+input, 
+.copy-button {
+  min-height: 44px; /* Recommended by Apple */
+}
+
+/* Fix for iOS momentum scrolling */
+body, .url-shortener, .url-lookup {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Base styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  /* Prevent text from being selectable on mobile taps */
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  line-height: 1.6;
+  color: var(--text-color);
+  background-color: var(--background);
+  /* Prevent content reflow */
+  width: 100%;
+  overflow-x: hidden;
+  /* Fix for iOS height calculation with bottom nav bars */
+  min-height: -webkit-fill-available;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  /* iOS height fix */
+  min-height: -webkit-fill-available;
+}
+
+/* Header */
+.App-header {
+  background: linear-gradient(135deg, var(--primary-color), #6366f1);
+  color: white;
+  padding: 2.5rem 1rem;
+  text-align: center;
+  border-bottom-left-radius: 25% 7%;
+  border-bottom-right-radius: 25% 7%;
+  margin-bottom: 2rem;
+  box-shadow: var(--shadow);
+  position: relative;
+  overflow: hidden;
+}
+
+.App-header::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+  pointer-events: none;
+}
+
+.logo-icon {
+  margin-bottom: 1rem;
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  padding: 1rem;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+}
+
+.icon-pulse {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.App-header h1 {
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+  font-size: 2.5rem;
+  letter-spacing: -0.025em;
+  position: relative;
+  z-index: 1;
+}
+
+.App-header p {
+  font-size: 1.125rem;
+  max-width: 600px;
+  margin: 0 auto;
+  opacity: 0.9;
+  font-weight: 300;
+  position: relative;
+  z-index: 1;
+}
+
+/* Main Content */
+.App-main {
+  flex: 1;
+  padding: 0 1rem 2rem;
+  /* Fix for iOS bouncing */
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin: -1rem;
+  padding-top: 1rem;
+}
+
+.column {
+  flex: 1;
+  min-width: 300px;
+  padding: 1rem;
+  transition: var(--transition);
+}
+
+/* Card Components */
+.url-shortener,
+.url-lookup {
+  background-color: var(--card-bg);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 2rem;
+  height: 100%;
+  transition: var(--transition);
+  border: 1px solid var(--border-color);
+  position: relative;
+  overflow: hidden;
+  /* Fix for Safari rendering issues */
+  -webkit-backface-visibility: hidden;
+  -webkit-transform: translateZ(0);
+}
+
+.url-shortener:hover,
+.url-lookup:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.url-shortener::after,
+.url-lookup::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 150px;
+  height: 150px;
+  background: radial-gradient(circle, rgba(79, 70, 229, 0.05) 0%, rgba(79, 70, 229, 0) 70%);
+  border-radius: 0 0 0 100%;
+  pointer-events: none;
+}
+
+h2 {
+  margin-bottom: 1.5rem;
+  color: var(--text-color);
+  font-weight: 600;
+  font-size: 1.5rem;
+  position: relative;
+  padding-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+}
+
+h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 50px;
+  height: 3px;
+  background-color: var(--primary-color);
+  border-radius: 3px;
+}
+
+.section-icon {
+  margin-right: 0.5rem;
+  color: var(--primary-color);
+}
+
+/* Form Elements */
+.input-group {
+  display: flex;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: var(--transition);
+  /* Safari fix for flex issues */
+  width: 100%;
+  flex-wrap: nowrap;
+}
+
+.input-group:focus-within {
+  box-shadow: 0 0 0 2px var(--primary-color);
+}
+
+input {
+  flex: 1;
+  padding: 0.875rem 1rem;
+  border: 1px solid var(--border-color);
+  border-right: none;
+  border-radius: var(--radius) 0 0 var(--radius);
+  font-size: 1rem;
+  outline: none;
+  transition: var(--transition);
+  /* Safari appearance fix */
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+input:focus {
+  border-color: var(--primary-color);
+}
+
+button {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 0 1.5rem;
+  border-radius: 0 var(--radius) var(--radius) 0;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 120px;
+  /* Safari appearance fix */
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+button:hover {
+  background-color: var(--primary-hover);
+}
+
+button:disabled {
+  background-color: var(--light-text);
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.button-icon {
+  margin-right: 0.5rem;
+}
+
+.success-icon {
+  color: var(--success);
+}
+
+/* Results and Errors */
+.error-message {
+  color: var(--error);
+  margin-bottom: 1.5rem;
+  padding: 0.75rem;
+  background-color: rgba(239, 68, 68, 0.1);
+  border-radius: var(--radius);
+  font-size: 0.875rem;
+  animation: fadeIn 0.3s ease;
+  display: flex;
+  align-items: center;
+}
+
+.error-icon {
+  margin-right: 0.5rem;
+  font-size: 1rem;
+}
+
+.result {
+  background-color: var(--secondary-color);
+  padding: 1.5rem;
+  border-radius: var(--radius);
+  border-left: 4px solid var(--primary-color);
+  animation: slideUp 0.5s ease;
+}
+
+.result h3 {
+  margin-bottom: 1rem;
+  color: var(--text-color);
+  font-size: 1.1rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+}
+
+.result-icon {
+  margin-right: 0.5rem;
+  color: var(--primary-color);
+}
+
+.shortened-url-container {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  padding: 0.75rem 1rem;
+  border-radius: calc(var(--radius) - 4px);
+  border: 1px solid var(--border-color);
+  word-break: break-all;
+  /* Safari flex fix */
+  flex-wrap: wrap;
+}
+
+.shortened-url-container a {
+  flex: 1;
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 500;
+  /* Fix for long URLs on Safari */
+  word-break: break-all;
+  overflow-wrap: break-word;
+  min-width: 0;
+}
+
+.shortened-url-container a:hover {
+  text-decoration: underline;
+}
+
+.copy-button {
+  background-color: rgba(79, 70, 229, 0.1);
+  color: var(--primary-color);
+  padding: 0.5rem 0.75rem;
+  margin-left: 0.5rem;
+  border-radius: calc(var(--radius) - 4px);
+  min-width: auto;
+  font-size: 0.875rem;
+  /* Safari needs explicit height */
+  height: auto;
+  margin-top: 0.5rem;
+}
+
+.copy-button:hover {
+  background-color: rgba(79, 70, 229, 0.2);
+}
+
+.url-tip {
+  margin-top: 0.75rem;
+  color: var(--light-text);
+  font-size: 0.875rem;
+  font-style: italic;
+}
+
+.url-info {
+  background-color: white;
+  padding: 1rem;
+  border-radius: calc(var(--radius) - 4px);
+  border: 1px solid var(--border-color);
+}
+
+.url-info p {
+  margin-bottom: 0.75rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.url-info p:last-child {
+  margin-bottom: 0;
+}
+
+.url-info strong {
+  color: var(--text-color);
+  margin-bottom: 0.25rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+}
+
+.url-info strong svg {
+  margin-right: 0.5rem;
+  color: var(--primary-color);
+}
+
+.url-info a {
+  color: var(--primary-color);
+  text-decoration: none;
+  word-break: break-all;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  /* Fix for long URLs on Safari */
+  word-break: break-all;
+  overflow-wrap: break-word;
+}
+
+.url-info a:hover {
+  text-decoration: underline;
+}
+
+.external-link-icon {
+  margin-left: 0.5rem;
+  font-size: 0.75rem;
+  opacity: 0.7;
+  /* Safari flex fix */
+  flex-shrink: 0;
+}
+
+.url-info span {
+  color: var(--light-text);
+}
+
+.not-found {
+  padding: 2rem 1rem;
+  background-color: var(--secondary-color);
+  border-radius: var(--radius);
+  text-align: center;
+  color: var(--light-text);
+  font-style: italic;
+}
+
+.not-found-icon {
+  color: var(--light-text);
+  margin-bottom: 1rem;
+  opacity: 0.7;
+}
+
+.not-found p:first-child {
+  font-weight: 500;
+  color: var(--text-color);
+  margin-bottom: 0.5rem;
+}
+
+/* Footer */
+.App-footer {
+  background-color: var(--text-color);
+  color: white;
+  padding: 1.5rem 1rem;
+  text-align: center;
+  font-size: 0.875rem;
+  /* Prevent footer from being hidden behind Safari's navigation bar */
+  margin-bottom: env(safe-area-inset-bottom, 0);
+}
+
+.footer-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer-feature {
+  display: inline-flex;
+  align-items: center;
+  margin-left: 1rem;
+}
+
+.footer-feature svg {
+  margin-right: 0.25rem;
+  font-size: 0.75rem;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { 
+    opacity: 0; 
+    transform: translateY(20px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .row {
+    flex-direction: column;
+  }
+  
+  .App-header {
+    padding: 2rem 1rem;
+    border-bottom-left-radius: 15% 3%;
+    border-bottom-right-radius: 15% 3%;
+  }
+  
+  .App-header h1 {
+    font-size: 2rem;
+  }
+  
+  .column {
+    margin-bottom: 1rem;
+  }
+  
+  .logo-icon {
+    padding: 0.75rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .footer-content {
+    flex-direction: column;
+  }
+  
+  .footer-feature {
+    margin-left: 0;
+    margin-top: 0.5rem;
+  }
+
+  /* Safari specific fixes for small screens */
+  .shortened-url-container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .shortened-url-container a {
+    margin-bottom: 0.75rem;
+  }
+
+  .copy-button {
+    margin-left: 0;
+    align-self: flex-end;
+  }
+
+  /* Fix for button alignment */
+  .input-group {
+    flex-direction: column;
+    border-radius: var(--radius);
+  }
+
+  .input-group input {
+    border-radius: var(--radius) var(--radius) 0 0;
+    border-right: 1px solid var(--border-color);
+    border-bottom: none;
+  }
+
+  .input-group button {
+    border-radius: 0 0 var(--radius) var(--radius);
+    width: 100%;
+    padding: 0.75rem;
+  }
+}
+
+/* iPhone X and later - safe area insets */
+@supports (padding: max(0px)) {
+  .App-footer {
+    padding-bottom: max(1.5rem, env(safe-area-inset-bottom));
+  }
+  
+  body {
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
+}
+
